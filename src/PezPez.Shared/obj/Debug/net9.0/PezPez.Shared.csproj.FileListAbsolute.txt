@@ -1,0 +1,11 @@
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\bin\Debug\net9.0\PezPez.Shared.deps.json
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\bin\Debug\net9.0\PezPez.Shared.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\bin\Debug\net9.0\PezPez.Shared.pdb
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\PezPez.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\PezPez.Shared.AssemblyInfoInputs.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\PezPez.Shared.AssemblyInfo.cs
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\PezPez.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\PezPez.Shared.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\refint\PezPez.Shared.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\PezPez.Shared.pdb
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Shared\obj\Debug\net9.0\ref\PezPez.Shared.dll

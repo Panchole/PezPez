@@ -1,0 +1,47 @@
+﻿@page "/health"
+@using PezPez.Shared.Responses
+@using PezPez.Shared.Dtos
+@using PezPez.Web.Services
+@inject HealthApiService HealthApiService
+
+<PageTitle>Health</PageTitle>
+
+<h3>Estado de la API</h3>
+
+@if (_loading)
+{
+    <p>Cargando...</p>
+}
+else if (!string.IsNullOrWhiteSpace(_error))
+{
+    <p style="color:red;">@_error</p>
+}
+else if (_response is not null)
+{
+    <p><strong>Success:</strong> @_response.Success</p>
+    <p><strong>Message:</strong> @_response.Message</p>
+    <p><strong>Status:</strong> @_response.Data?.Status</p>
+    <p><strong>Timestamp:</strong> @_response.Data?.Timestamp</p>
+}
+
+@code {
+    private ApiResponse<HealthCheckDto>? _response;
+    private bool _loading = true;
+    private string? _error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _response = await HealthApiService.GetHealthAsync();
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

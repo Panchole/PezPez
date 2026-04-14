@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PezPez.Application\PezPez.Application.csproj" />
+    <ProjectReference Include="..\PezPez.Infrastructure\PezPez.Infrastructure.csproj" />
+    <ProjectReference Include="..\PezPez.Shared\PezPez.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+
+</Project>

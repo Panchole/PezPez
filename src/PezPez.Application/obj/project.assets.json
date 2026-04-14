@@ -1,0 +1,114 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "PezPez.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/PezPez.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PezPez.Domain.dll": {}
+        }
+      },
+      "PezPez.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/PezPez.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PezPez.Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PezPez.Domain/1.0.0": {
+      "type": "project",
+      "path": "../PezPez.Domain/PezPez.Domain.csproj",
+      "msbuildProject": "../PezPez.Domain/PezPez.Domain.csproj"
+    },
+    "PezPez.Shared/1.0.0": {
+      "type": "project",
+      "path": "../PezPez.Shared/PezPez.Shared.csproj",
+      "msbuildProject": "../PezPez.Shared/PezPez.Shared.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "PezPez.Domain >= 1.0.0",
+      "PezPez.Shared >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Panchole\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Application\\PezPez.Application.csproj",
+      "projectName": "PezPez.Application",
+      "projectPath": "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Application\\PezPez.Application.csproj",
+      "packagesPath": "C:\\Users\\Panchole\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Application\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Panchole\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Domain\\PezPez.Domain.csproj": {
+              "projectPath": "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Domain\\PezPez.Domain.csproj"
+            },
+            "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Shared\\PezPez.Shared.csproj": {
+              "projectPath": "C:\\Users\\Panchole\\Documents\\PezPez\\src\\PezPez.Shared\\PezPez.Shared.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.300"
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

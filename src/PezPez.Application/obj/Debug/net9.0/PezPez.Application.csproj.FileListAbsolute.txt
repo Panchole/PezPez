@@ -1,0 +1,17 @@
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.csproj.AssemblyReference.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.AssemblyInfoInputs.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.AssemblyInfo.cs
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.csproj.CoreCompileInputs.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Application.deps.json
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Application.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Application.pdb
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Domain.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Shared.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Domain.pdb
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\bin\Debug\net9.0\PezPez.Shared.pdb
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.A.61D84E92.Up2Date
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\refint\PezPez.Application.dll
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\PezPez.Application.pdb
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Application\obj\Debug\net9.0\ref\PezPez.Application.dll
