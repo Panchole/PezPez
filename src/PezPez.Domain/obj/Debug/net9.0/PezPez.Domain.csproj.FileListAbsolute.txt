@@ -5,6 +5,7 @@ C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Dom
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Domain.AssemblyInfoInputs.cache
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Domain.AssemblyInfo.cs
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Domain.sourcelink.json
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Domain.dll
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\refint\PezPez.Domain.dll
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Domain\obj\Debug\net9.0\PezPez.Domain.pdb

@@ -1,23 +1,51 @@
 ﻿@inherits LayoutComponentBase
+@using MudBlazor
+@using PezPez.Web.Theme
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<MudThemeProvider Theme="AppTheme.PezPezTheme" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div class="app-layout">
+    <aside class="sidebar-shell">
+        <div class="sidebar-brand">
+            <MudAvatar Size="Size.Large" Class="brand-avatar">P</MudAvatar>
+
+            <div class="sidebar-brand-text">
+                <div class="sidebar-title">PezPez</div>
+                <div class="sidebar-subtitle">Operations Console</div>
+            </div>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <NavMenu />
+    </aside>
 
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
+    <div class="main-shell">
+        <header class="topbar-shell">
+            <div class="topbar-title">Operations Console</div>
+
+            <div class="topbar-search">
+                <MudIcon Icon="@Icons.Material.Filled.Search" Class="search-icon" />
+                <span class="search-placeholder">Buscar módulos, productos o acciones...</span>
+            </div>
+
+            <div class="topbar-actions">
+                <MudTooltip Text="Notificaciones">
+                    <MudIconButton Icon="@Icons.Material.Filled.NotificationsNone" Color="Color.Default"
+                                   Class="topbar-icon" />
+                </MudTooltip>
+
+                <MudTooltip Text="Configuración">
+                    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" Class="topbar-icon" />
+                </MudTooltip>
+
+                <MudAvatar Size="Size.Medium" Class="user-avatar">FB</MudAvatar>
+            </div>
+        </header>
+
+        <main class="content-shell">
+            @Body
+        </main>
+    </div>
 </div>

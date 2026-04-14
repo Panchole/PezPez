@@ -1,0 +1,294 @@
+﻿@page "/products"
+@using PezPez.Web.Components.Dialogs
+@inject ProductApiService ProductApiService
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+<div class="products-header">
+    <div class="products-title-block">
+        <h3>Productos</h3>
+        <p>Administra tu catálogo con una experiencia más limpia, moderna y profesional.</p>
+    </div>
+
+    <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+        <MudTooltip Text="Actualizar listado">
+            <MudIconButton Icon="@Icons.Material.Filled.Refresh" Color="Color.Default" OnClick="LoadProductsAsync" />
+        </MudTooltip>
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                   Size="Size.Medium" Class="elevated-action-btn" OnClick="OpenCreateDialog">
+            Nuevo producto
+        </MudButton>
+    </MudStack>
+</div>
+
+<div class="products-kpis">
+    <div class="kpi-card">
+        <div class="kpi-label">Total productos</div>
+        <div class="kpi-value">@_products.Count</div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-label">Activos</div>
+        <div class="kpi-value">@_products.Count(x => x.IsActive)</div>
+    </div>
+
+    <div class="kpi-card">
+        <div class="kpi-label">Stock total</div>
+        <div class="kpi-value">@_products.Sum(x => x.Stock)</div>
+    </div>
+</div>
+
+<MudPaper Class="products-card pa-4">
+    <div class="products-toolbar">
+        <MudTextField T="string" Label="Buscar productos" Variant="Variant.Outlined" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" Immediate="true" @bind-Value="_searchText" Class="mr-2" />
+
+        <MudSpacer />
+    </div>
+
+    @if (_loading)
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" Class="ma-4" />
+    }
+    else if (!_filteredProducts.Any())
+    {
+        <div class="empty-state-box">
+            <MudIcon Icon="@Icons.Material.Filled.Inventory2" Size="Size.Large" Class="mb-2" />
+            <MudText Typo="Typo.h6">No hay productos para mostrar</MudText>
+            <MudText Typo="Typo.body2">Agrega tu primer producto o ajusta la búsqueda.</MudText>
+        </div>
+    }
+    else
+    {
+        <MudTable Items="_filteredProducts" Hover="true" Dense="true" Striped="false" Bordered="false">
+            <HeaderContent>
+                <MudTh>Id</MudTh>
+                <MudTh>Nombre</MudTh>
+                <MudTh>Descripción</MudTh>
+                <MudTh>Precio</MudTh>
+                <MudTh>Stock</MudTh>
+                <MudTh>Estado</MudTh>
+                <MudTh>Acciones</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Nombre">
+                    <MudText Typo="Typo.body1" Style="font-weight:700;">@context.Name</MudText>
+                    <MudText Typo="Typo.caption" Style="color:#6b7280;">SKU interno #@context.Id</MudText>
+                </MudTd>
+                <MudTd DataLabel="Descripción">@context.Description</MudTd>
+                <MudTd DataLabel="Precio">@context.Price.ToString("C")</MudTd>
+                <MudTd DataLabel="Stock">@context.Stock</MudTd>
+                <MudTd DataLabel="Estado">
+                    @if (context.IsActive)
+                    {
+                        <MudChip T="string" Color="Color.Success" Variant="Variant.Outlined">Activo</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip T="string" Color="Color.Default" Variant="Variant.Outlined">Inactivo</MudChip>
+                    }
+                </MudTd>
+                <MudTd DataLabel="Acciones">
+                    <div class="table-actions">
+                        <MudTooltip Text="Editar producto">
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" Size="Size.Small"
+                                           Variant="Variant.Text" OnClick="@(() => Edit(context))" />
+                        </MudTooltip>
+
+                        <MudTooltip Text="Eliminar producto">
+                            <MudIconButton Icon="@Icons.Material.Filled.DeleteOutline" Color="Color.Error" Size="Size.Small"
+                                           Variant="Variant.Text" OnClick="@(() => ConfirmDeleteAsync(context))" />
+                        </MudTooltip>
+                    </div>
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+<MudDialog @bind-Visible="_formDialogVisible" Options="_dialogOptions">
+    <DialogContent>
+        <MudText Typo="Typo.h6" Class="mb-4">@(_isEditMode ? "Editar producto" : "Nuevo producto")</MudText>
+
+        <MudGrid>
+            <MudItem xs="12">
+                <MudTextField Label="Nombre" Variant="Variant.Outlined" @bind-Value="_model.Name" Required="true" />
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudTextField Label="Descripción" Variant="Variant.Outlined" Lines="3"
+                              @bind-Value="_model.Description" />
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudNumericField T="decimal" Label="Precio" Variant="Variant.Outlined" Min="0"
+                                 @bind-Value="_model.Price" />
+            </MudItem>
+
+            <MudItem xs="12" md="6">
+                <MudNumericField T="int" Label="Stock" Variant="Variant.Outlined" Min="0" @bind-Value="_model.Stock" />
+            </MudItem>
+
+            <MudItem xs="12">
+                <MudCheckBox T="bool" Label="Producto activo" @bind-Value="_model.IsActive" />
+            </MudItem>
+        </MudGrid>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton Variant="Variant.Text" OnClick="CloseDialog">
+            Cancelar
+        </MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync">
+            @(_isEditMode ? "Actualizar" : "Guardar")
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private List<ProductDto> _products = new();
+    private bool _loading = true;
+    private bool _isEditMode = false;
+    private bool _formDialogVisible = false;
+    private string _searchText = string.Empty;
+
+    private DialogOptions _dialogOptions = new()
+    {
+        CloseButton = true,
+        MaxWidth = MaxWidth.Small,
+        FullWidth = true
+    };
+
+    private UpdateProductRequest _model = new()
+    {
+        IsActive = true
+    };
+
+    private IEnumerable<ProductDto> _filteredProducts =>
+        string.IsNullOrWhiteSpace(_searchText)
+            ? _products
+            : _products.Where(p =>
+                (p.Name?.Contains(_searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                (p.Description?.Contains(_searchText, StringComparison.OrdinalIgnoreCase) ?? false));
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProductsAsync();
+    }
+
+    private async Task LoadProductsAsync()
+    {
+        _loading = true;
+        _products = await ProductApiService.GetAllAsync();
+        _loading = false;
+    }
+
+    private void OpenCreateDialog()
+    {
+        _isEditMode = false;
+        _model = new UpdateProductRequest
+        {
+            IsActive = true
+        };
+        _formDialogVisible = true;
+    }
+
+    private void Edit(ProductDto product)
+    {
+        _isEditMode = true;
+        _model = new UpdateProductRequest
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price,
+            Stock = product.Stock,
+            IsActive = product.IsActive
+        };
+        _formDialogVisible = true;
+    }
+
+    private void CloseDialog()
+    {
+        _formDialogVisible = false;
+    }
+
+    private async Task SaveAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_model.Name))
+        {
+            Snackbar.Add("El nombre es obligatorio.", Severity.Warning);
+            return;
+        }
+
+        if (_isEditMode)
+        {
+            var updated = await ProductApiService.UpdateAsync(_model);
+
+            if (updated)
+            {
+                Snackbar.Add("Producto actualizado correctamente.", Severity.Success);
+            }
+            else
+            {
+                Snackbar.Add("No se pudo actualizar el producto.", Severity.Error);
+                return;
+            }
+        }
+        else
+        {
+            var request = new CreateProductRequest
+            {
+                Name = _model.Name,
+                Description = _model.Description,
+                Price = _model.Price,
+                Stock = _model.Stock,
+                IsActive = _model.IsActive
+            };
+
+            var created = await ProductApiService.CreateAsync(request);
+
+            if (created is not null)
+            {
+                Snackbar.Add("Producto creado correctamente.", Severity.Success);
+            }
+            else
+            {
+                Snackbar.Add("No se pudo crear el producto.", Severity.Error);
+                return;
+            }
+        }
+
+        _formDialogVisible = false;
+        await LoadProductsAsync();
+    }
+
+    private async Task ConfirmDeleteAsync(ProductDto product)
+    {
+        var parameters = new DialogParameters<ConfirmDialog>
+        {
+            { x => x.Title, "Eliminar producto" },
+            { x => x.Message, $"¿Seguro que deseas eliminar '{product.Name}'?" }
+        };
+
+        var dialog = await DialogService.ShowAsync<ConfirmDialog>("Confirmación", parameters);
+        var result = await dialog.Result;
+
+        if (result is null || result.Canceled)
+            return;
+
+        var deleted = await ProductApiService.DeleteAsync(product.Id);
+
+        if (deleted)
+        {
+            Snackbar.Add("Producto eliminado correctamente.", Severity.Success);
+            await LoadProductsAsync();
+        }
+        else
+        {
+            Snackbar.Add("No se pudo eliminar el producto.", Severity.Error);
+        }
+    }
+}

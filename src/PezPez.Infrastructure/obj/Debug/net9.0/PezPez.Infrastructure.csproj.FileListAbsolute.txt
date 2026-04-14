@@ -13,6 +13,7 @@ C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\Pe
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\PezPez.Infrastructure.AssemblyInfoInputs.cache
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\PezPez.Infrastructure.AssemblyInfo.cs
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\PezPez.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\PezPez.Infrastructure.sourcelink.json
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\PezPez.I.3C3BE5BE.Up2Date
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\PezPez.Infrastructure.dll
 C:\Users\Panchole\Documents\PezPez\src\PezPez.Infrastructure\obj\Debug\net9.0\refint\PezPez.Infrastructure.dll

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PezPez.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a7614dc7766ca8d485ccdaab557d5faa5ea966f")]
 [assembly: System.Reflection.AssemblyProductAttribute("PezPez.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PezPez.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

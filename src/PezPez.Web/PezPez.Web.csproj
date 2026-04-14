@@ -5,10 +5,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\Dialogs\" />
     <Folder Include="Components\Pages\Health\" />
+    <Folder Include="Components\Pages\Products\" />
     <Folder Include="Configurations\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="Theme\" />
   </ItemGroup>
 
   <ItemGroup>

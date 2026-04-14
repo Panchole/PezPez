@@ -1,7 +1,7 @@
 using System.Net.Http.Headers;
-using PezPez.Web.Components;
 using PezPez.Web.Services;
 using MudBlazor.Services;
+using PezPez.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +22,7 @@ builder.Services.AddHttpClient("PezPezApi", client =>
 });
 
 builder.Services.AddScoped<HealthApiService>();
+builder.Services.AddScoped<ProductApiService>();
 
 var app = builder.Build();
 
