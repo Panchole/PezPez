@@ -1,7 +1,327 @@
 ﻿@page "/"
+@using MudBlazor
 
-<PageTitle>Home</PageTitle>
+<div class="dashboard-home">
 
-<h1>Hello, world!</h1>
+    <div class="home-hero">
+        <div class="home-hero-copy">
+            <MudText Typo="Typo.h4" Class="home-title">Bienvenido de nuevo, Francisco</MudText>
+            <MudText Typo="Typo.body1" Class="home-subtitle">
+                Aquí tienes un resumen rápido del sistema, la actividad reciente y accesos directos a tus módulos
+                principales.
+            </MudText>
 
-Welcome to your new app.
+            <MudStack Row="true" Spacing="2" Class="mt-4">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.AddBox"
+                           Class="elevated-action-btn" Href="/products">
+                    Nuevo producto
+                </MudButton>
+
+                <MudButton Variant="Variant.Outlined" Color="Color.Default"
+                           StartIcon="@Icons.Material.Filled.MonitorHeart" Href="/health">
+                    Ver health
+                </MudButton>
+            </MudStack>
+        </div>
+
+        <MudPaper Class="hero-status-card" Elevation="0">
+            <MudStack Spacing="2">
+                <MudText Typo="Typo.subtitle2" Class="section-eyebrow">Resumen del día</MudText>
+
+                <div class="hero-status-row">
+                    <span class="hero-status-label">Entorno</span>
+                    <MudChip T="string" Color="Color.Success" Variant="Variant.Outlined">Operativo</MudChip>
+                </div>
+
+                <div class="hero-status-row">
+                    <span class="hero-status-label">Última sincronización</span>
+                    <span class="hero-status-value">Hace 2 minutos</span>
+                </div>
+
+                <div class="hero-status-row">
+                    <span class="hero-status-label">Incidencias abiertas</span>
+                    <span class="hero-status-value">2 menores</span>
+                </div>
+            </MudStack>
+        </MudPaper>
+    </div>
+
+    <div class="products-kpis">
+        <div class="kpi-card">
+            <div class="kpi-top">
+                <MudIcon Icon="@Icons.Material.Filled.Inventory2" Class="kpi-icon" />
+                <MudChip T="string" Color="Color.Success" Size="Size.Small" Variant="Variant.Text">+12%</MudChip>
+            </div>
+            <div class="kpi-label">Productos activos</div>
+            <div class="kpi-value">128</div>
+            <div class="kpi-footnote">12 nuevos esta semana</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-top">
+                <MudIcon Icon="@Icons.Material.Filled.Warehouse" Class="kpi-icon" />
+                <MudChip T="string" Color="Color.Info" Size="Size.Small" Variant="Variant.Text">Estable</MudChip>
+            </div>
+            <div class="kpi-label">Stock total</div>
+            <div class="kpi-value">3,420</div>
+            <div class="kpi-footnote">Nivel saludable de inventario</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-top">
+                <MudIcon Icon="@Icons.Material.Filled.MonitorHeart" Class="kpi-icon" />
+                <MudChip T="string" Color="Color.Success" Size="Size.Small" Variant="Variant.Text">99.9%</MudChip>
+            </div>
+            <div class="kpi-label">Salud del sistema</div>
+            <div class="kpi-value">Excelente</div>
+            <div class="kpi-footnote">API y UI respondiendo bien</div>
+        </div>
+
+        <div class="kpi-card">
+            <div class="kpi-top">
+                <MudIcon Icon="@Icons.Material.Filled.NotificationsActive" Class="kpi-icon" />
+                <MudChip T="string" Color="Color.Warning" Size="Size.Small" Variant="Variant.Text">3 alertas</MudChip>
+            </div>
+            <div class="kpi-label">Seguimiento</div>
+            <div class="kpi-value">Pendiente</div>
+            <div class="kpi-footnote">Revisar alertas operativas</div>
+        </div>
+    </div>
+
+    <MudGrid Spacing="3">
+        <MudItem xs="12" md="8">
+            <MudPaper Class="products-card pa-5" Elevation="0">
+                <div class="dashboard-card-header">
+                    <div>
+                        <MudText Typo="Typo.h6">Movimiento semanal</MudText>
+                        <MudText Typo="Typo.body2" Class="muted-text">
+                            Actividad general de productos durante los últimos 7 días
+                        </MudText>
+                    </div>
+
+                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Outlined">Últimos 7 días</MudChip>
+                </div>
+
+                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" ChartLabels="@XAxisLabels" Width="100%"
+                          Height="350px" CanHideSeries />
+                <MudButton Variant="Variant.Filled" @onclick="RandomizeData">Randomize data</MudButton>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Class="products-card pa-5 quick-actions-card" Elevation="0">
+                <MudChart ChartType="ChartType.Pie" ChartSeries="@data.AsChartDataSet()" @bind-SelectedIndex="Index"
+                          ChartLabels="@labels" Width="100%" Height="300px" />
+
+                <MudPaper Class="pa-4 mt-2 d-flex justify-center">
+                    <MudButton OnClick="AddDataSize" Variant="Variant.Filled" Color="Color.Primary">Add</MudButton>
+                    <MudButton @onclick="RandomizeData1" Variant="Variant.Filled" Class="mx-4">Randomize</MudButton>
+                    <MudButton OnClick="RemoveDataSize" Variant="Variant.Filled" Color="Color.Secondary">Remove
+                    </MudButton>
+                </MudPaper>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="7">
+            <MudPaper Class="products-card pa-5" Elevation="0">
+                <div class="dashboard-card-header">
+                    <div>
+                        <MudText Typo="Typo.h6">Actividad reciente</MudText>
+                        <MudText Typo="Typo.body2" Class="muted-text">
+                            Eventos más recientes del sistema
+                        </MudText>
+                    </div>
+                </div>
+
+                <MudTimeline Class="mt-4">
+                    <MudTimelineItem Color="Color.Success" Variant="Variant.Outlined">
+                        <ItemOpposite>
+                            <MudText Typo="Typo.caption">Hace 5 min</MudText>
+                        </ItemOpposite>
+                        <ItemDot>
+                            <MudIcon Icon="@Icons.Material.Filled.CheckCircleOutline" />
+                        </ItemDot>
+                        <ItemContent>
+                            <MudText Typo="Typo.subtitle2">Producto actualizado</MudText>
+                            <MudText Typo="Typo.body2" Class="muted-text">
+                                Se actualizó el stock del producto “Pez de plástico”.
+                            </MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+
+                    <MudTimelineItem Color="Color.Info" Variant="Variant.Outlined">
+                        <ItemOpposite>
+                            <MudText Typo="Typo.caption">Hace 12 min</MudText>
+                        </ItemOpposite>
+                        <ItemDot>
+                            <MudIcon Icon="@Icons.Material.Filled.Api" />
+                        </ItemDot>
+                        <ItemContent>
+                            <MudText Typo="Typo.subtitle2">API verificada</MudText>
+                            <MudText Typo="Typo.body2" Class="muted-text">
+                                El servicio backend respondió correctamente al health check.
+                            </MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+
+                    <MudTimelineItem Color="Color.Warning" Variant="Variant.Outlined">
+                        <ItemOpposite>
+                            <MudText Typo="Typo.caption">Hace 28 min</MudText>
+                        </ItemOpposite>
+                        <ItemDot>
+                            <MudIcon Icon="@Icons.Material.Filled.NotificationsActive" />
+                        </ItemDot>
+                        <ItemContent>
+                            <MudText Typo="Typo.subtitle2">Alerta operativa</MudText>
+                            <MudText Typo="Typo.body2" Class="muted-text">
+                                Se detectó un inventario bajo en uno de los productos monitoreados.
+                            </MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+
+                    <MudTimelineItem Color="Color.Primary" Variant="Variant.Outlined">
+                        <ItemOpposite>
+                            <MudText Typo="Typo.caption">Hoy</MudText>
+                        </ItemOpposite>
+                        <ItemDot>
+                            <MudIcon Icon="@Icons.Material.Filled.Login" />
+                        </ItemDot>
+                        <ItemContent>
+                            <MudText Typo="Typo.subtitle2">Inicio de sesión</MudText>
+                            <MudText Typo="Typo.body2" Class="muted-text">
+                                Sesión iniciada correctamente en el panel administrativo.
+                            </MudText>
+                        </ItemContent>
+                    </MudTimelineItem>
+                </MudTimeline>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="5">
+            <MudPaper Class="products-card pa-5" Elevation="0">
+                <div class="dashboard-card-header">
+                    <div>
+                        <MudText Typo="Typo.h6">Estado del sistema</MudText>
+                        <MudText Typo="Typo.body2" Class="muted-text">
+                            Estado actual de módulos y capacidad operativa
+                        </MudText>
+                    </div>
+                </div>
+
+                <MudStack Spacing="3" Class="mt-4">
+                    <div>
+                        <div class="status-row">
+                            <span>API Backend</span>
+                            <MudChip T="string" Color="Color.Success" Variant="Variant.Outlined">Online</MudChip>
+                        </div>
+                        <MudProgressLinear Color="Color.Secondary" Striped="true" Size="Size.Medium" Value="96"
+                                           Class="my-7" />
+                    </div>
+
+                    <div>
+                        <div class="status-row">
+                            <span>Base de datos</span>
+                            <MudChip T="string" Color="Color.Success" Variant="Variant.Outlined">Estable</MudChip>
+                        </div>
+                        <MudProgressLinear Color="Color.Info" Striped="true" Size="Size.Medium" Value="89"
+                                           Class="my-7" />
+                    </div>
+
+                    <div>
+                        <div class="status-row">
+                            <span>Interfaz web</span>
+                            <MudChip T="string" Color="Color.Success" Variant="Variant.Outlined">Óptima</MudChip>
+                        </div>
+                        <MudProgressLinear Color="Color.Primary" Striped="true" Size="Size.Medium" Value="98"
+                                           Class="my-7" />
+                    </div>
+
+                    <MudDivider />
+
+                    <MudPaper Class="mini-highlight pa-4" Elevation="0">
+                        <MudText Typo="Typo.subtitle2">Sugerencia</MudText>
+                        <MudText Typo="Typo.body2" Class="muted-text mt-1">
+                            El sistema está listo para incorporar métricas reales desde Products y Health en la
+                            siguiente iteración.
+                        </MudText>
+                    </MudPaper>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</div>
+
+@code {
+    private string[] _chartLabels = { "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom" };
+
+    private List<ChartSeries<double>> _chartSeries = new()
+    {
+        new ChartSeries<double>
+        {
+            Name = "Movimientos",
+            Data = new double[] { 12, 19, 15, 27, 22, 31, 26 }
+        }
+    };
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        RandomizeData();
+    }
+
+    public List<ChartSeries<double>> Series = new List<ChartSeries<double>>();
+    public string[] XAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
+
+    Random random = new Random();
+    public void RandomizeData()
+    {
+        var newSeries = new List<ChartSeries<double>>();
+        for (int s = 1; s <= 10; s++)
+        {
+            var series = new ChartSeries<double>() { Name = $"Series {s}", Data = new double[9] };
+            for (int i = 0; i < 9; i++)
+                series.Data[i].Y = random.NextDouble() * 100;
+            newSeries.Add(series);
+        }
+        Series = newSeries;
+        StateHasChanged();
+    }
+
+
+
+    private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+    int dataSize = 4;
+    double[] data = { 77 };
+    string[] labels = { "Uranium", "Plutonium", "Thorium", "Caesium", "Technetium", "Promethium",
+                        "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Protactinium",
+                        "Neptunium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Mudblaznium" };
+
+    Random random1 = new Random();
+
+    void RandomizeData1()
+    {
+        var new_data = new double[dataSize];
+        for (int i = 0; i < new_data.Length; i++)
+            new_data[i] = Math.Round(random.NextDouble() * 100, 2);
+        data = new_data;
+        StateHasChanged();
+    }
+
+    void AddDataSize()
+    {
+        if (dataSize < 20)
+        {
+            dataSize = dataSize + 1;
+            RandomizeData1();
+        }
+    }
+
+    void RemoveDataSize()
+    {
+        if (dataSize > 0)
+        {
+            dataSize = dataSize - 1;
+            RandomizeData1();
+        }
+    }
+}

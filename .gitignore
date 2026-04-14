@@ -20,6 +20,12 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
+.vs/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
 [Ll]og/
 [Ll]ogs/
 
