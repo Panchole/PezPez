@@ -2,12 +2,12 @@
 
 ![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?logo=.net&logoColor=white)
 ![Blazor](https://img.shields.io/badge/Blazor-Frontend-5C2D91?logo=blazor&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-Backend-512BD4?logo=dotnet&logoColor=white)
 ![MudBlazor](https://img.shields.io/badge/MudBlazor-UI%20Library-6E57FF)
-![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-Private-lightgrey)
 
-PezPez Operations Console es una aplicación administrativa moderna construida con **Blazor en .NET 8** para el frontend y **FastAPI en Python** para el backend.  
-La interfaz está pensada como un dashboard profesional, minimalista y fresco para administrar productos, revisar salud del sistema y visualizar actividad operativa.
+PezPez Operations Console es una aplicación administrativa moderna construida con **Blazor en .NET 8** para el frontend y **ASP.NET Core Web API** para el backend.  
+La interfaz fue diseñada como una consola operativa limpia, fresca y profesional para administrar productos, revisar el estado del sistema y visualizar actividad relevante desde un panel centralizado.
 
 ---
 
@@ -17,6 +17,7 @@ La interfaz está pensada como un dashboard profesional, minimalista y fresco pa
 - [Stack tecnológico](#stack-tecnológico)
 - [Arquitectura](#arquitectura)
 - [Estructura del proyecto](#estructura-del-proyecto)
+- [Layout y navegación](#layout-y-navegación)
 - [Home dashboard](#home-dashboard)
 - [Componentes utilizados](#componentes-utilizados)
 - [Requisitos previos](#requisitos-previos)
@@ -34,9 +35,9 @@ La interfaz está pensada como un dashboard profesional, minimalista y fresco pa
 ### Layout moderno
 
 - Sidebar fijo y limpio.
-- Topbar minimalista.
+- Topbar minimalista con búsqueda y acciones rápidas.
 - Navegación clara por módulos.
-- Diseño responsive y consistente.
+- Diseño responsive y consistente en desktop y mobile.
 
 ### Home tipo dashboard
 
@@ -66,21 +67,21 @@ La página principal fue rediseñada como un dashboard profesional con:
 
 ### Frontend
 
-- .NET 8
-- Blazor Web App
-- MudBlazor
+- **.NET 8**
+- **Blazor Web App**
+- **MudBlazor**
 - CSS personalizado
 
 ### Backend
 
-- Python 3.11+
-- FastAPI
-- Pydantic
-- Uvicorn
+- **ASP.NET Core Web API**
+- C# / .NET 8
+- Validación y modelado con DTOs
+- API REST
 
 ### Infraestructura
 
-- Docker / Docker Compose
+- Docker / Docker Compose opcional
 - Comunicación HTTP entre frontend y backend
 - Preparado para autenticación JWT/OIDC
 
@@ -90,17 +91,17 @@ La página principal fue rediseñada como un dashboard profesional con:
 
 El proyecto sigue una arquitectura separada por responsabilidades:
 
-- **Frontend:** Blazor se encarga de la experiencia visual y navegación.
-- **Backend:** FastAPI expone la lógica de negocio y los endpoints REST.
-- **Contratos:** DTOs y modelos claros para integrar ambos lados.
-- **Infraestructura:** Despliegue independiente y escalable.
+- **Frontend:** Blazor se encarga de la experiencia visual, navegación y composición de la UI.
+- **Backend:** ASP.NET Core Web API expone la lógica de negocio y los endpoints REST.
+- **Contratos:** DTOs y modelos compartidos para mantener integración clara.
+- **Infraestructura:** despliegue independiente y escalable por capa.
 
 ### Flujo general
 
 1. El usuario entra a la interfaz Blazor.
-2. Blazor consume la API FastAPI por HTTP.
-3. FastAPI valida, procesa y responde.
-4. La UI presenta la información con componentes ricos y visuales.
+2. Blazor consume la API ASP.NET Core por HTTP.
+3. La API valida, procesa y responde.
+4. La UI presenta la información mediante componentes ricos y visuales.
 
 ---
 
@@ -109,9 +110,9 @@ El proyecto sigue una arquitectura separada por responsabilidades:
 ```bash
 PezPez/
 ├── PezPez.Web/                # Frontend Blazor
-├── PezPez.Api/                # Backend FastAPI
-├── PezPez.Shared/             # Contratos compartidos opcionales
-├── docker-compose.yml
+├── PezPez.Api/                # Backend ASP.NET Core Web API
+├── PezPez.Shared/             # DTOs/contratos compartidos opcionales
+├── PezPez.sln
 └── README.md
 ```
 
@@ -134,21 +135,50 @@ PezPez.Web/
 └── Program.cs
 ```
 
-### Backend FastAPI
+### Backend ASP.NET Core Web API
 
 ```bash
 PezPez.Api/
-├── app/
-│   ├── main.py
-│   ├── api/
-│   ├── core/
-│   ├── models/
-│   ├── schemas/
-│   ├── services/
-│   └── repositories/
-├── requirements.txt
-└── Dockerfile
+├── Controllers/
+├── Models/
+├── DTOs/
+├── Services/
+├── Data/
+├── Program.cs
+├── appsettings.json
+└── appsettings.Development.json
 ```
+
+---
+
+## Layout y navegación
+
+La UI actual fue ajustada para evitar el look de template genérico y lograr una apariencia más profesional.
+
+### Sidebar
+
+- Panel lateral fijo.
+- Logo circular inicial.
+- Nombre de la aplicación.
+- Secciones: General y Examples.
+- Estados activos claramente visibles.
+
+### Topbar
+
+- Título de sistema.
+- Campo de búsqueda.
+- Acciones rápidas.
+- Avatar de usuario.
+
+### Navegación
+
+- Dashboard.
+- Health.
+- Productos.
+- Counter.
+- Weather.
+
+La estructura actual busca un equilibrio entre simplicidad visual y sensación de sistema real.
 
 ---
 
@@ -225,10 +255,10 @@ La Home actual incluye:
 
 Antes de ejecutar el proyecto necesitas:
 
-- .NET 8 SDK
-- Python 3.11 o superior
-- Visual Studio 2022 o VS Code
-- Docker opcional, pero recomendado
+- **.NET 8 SDK**
+- **Visual Studio 2022** o **VS Code**
+- **ASP.NET Core runtime** incluido con el SDK
+- Docker opcional, pero recomendado si vas a contenedores
 
 ---
 
@@ -241,18 +271,16 @@ git clone https://github.com/tu-usuario/pezpez.git
 cd pezpez
 ```
 
-### 2. Restaurar dependencias del frontend
+### 2. Restaurar dependencias
 
 ```bash
-cd PezPez.Web
 dotnet restore
 ```
 
-### 3. Instalar dependencias del backend
+### 3. Compilar la solución
 
 ```bash
-cd ../PezPez.Api
-pip install -r requirements.txt
+dotnet build
 ```
 
 ---
@@ -270,7 +298,14 @@ dotnet run
 
 ```bash
 cd PezPez.Api
-uvicorn app.main:app --reload
+dotnet run
+```
+
+### Ejecutar desde la solución
+
+```bash
+dotnet run --project PezPez.Api
+dotnet run --project PezPez.Web
 ```
 
 ### Con Docker Compose
@@ -285,17 +320,27 @@ docker compose up --build
 
 ### Frontend
 
+Normalmente el frontend consumirá la API mediante una base URL configurada en appsettings o variables de entorno.
+
 ```env
-API_BASE_URL=https://localhost:8000
+API_BASE_URL=https://localhost:5001
 ```
 
 ### Backend
 
+Las configuraciones típicas de ASP.NET Core pueden definirse así:
+
 ```env
-APP_NAME=PezPez API
-APP_ENV=development
-DATABASE_URL=postgresql://user:password@localhost:5432/pezpez
+ASPNETCORE_ENVIRONMENT=Development
+ConnectionStrings__DefaultConnection=Server=localhost;Database=PezPez;Trusted_Connection=True;TrustServerCertificate=True
 ```
+
+También puedes usar:
+
+- `appsettings.json`
+- `appsettings.Development.json`
+- secretos de usuario en desarrollo
+- variables de entorno en producción
 
 ---
 
@@ -311,9 +356,9 @@ DATABASE_URL=postgresql://user:password@localhost:5432/pezpez
 ### Backend
 
 - API REST con rutas versionadas.
-- DTOs claros en `schemas`.
+- DTOs claros en `DTOs`.
 - Lógica de negocio separada de acceso a datos.
-- Validación explícita con Pydantic.
+- Validación explícita y respuestas consistentes.
 
 ### UI
 
@@ -361,24 +406,21 @@ DATABASE_URL=postgresql://user:password@localhost:5432/pezpez
 - La gráfica simple fue reemplazada por una sección más dinámica.
 - Se añadieron componentes nuevos para enriquecer la interfaz.
 - El layout fue estabilizado para evitar desalineación entre sidebar y contenido.
-- El proyecto está pensado para evolucionar de forma limpia hacia datos reales.
+- El proyecto está pensado para evolucionar de forma limpia hacia datos reales desde la API.
+
+---
+
+## Próximos pasos
+
+- Conectar datos reales desde ASP.NET Core.
+- Agregar métricas vivas.
+- Implementar autenticación.
+- Documentar endpoints del backend.
+- Mejorar componentes de dashboard.
+- Agregar estados vacíos, carga y error bien diseñados.
 
 ---
 
 ## Licencia
 
 Este proyecto se distribuye bajo la licencia que defina el equipo o la organización propietaria.
-
----
-
-## Próximos pasos
-
-- Conectar datos reales.
-- Agregar métricas vivas.
-- Implementar autenticación.
-- Documentar endpoints del backend.
-- Mejorar componentes de dashboard.
-
----
-
-Si quieres, el siguiente paso puede ser convertir este README en una **versión más corporativa, más técnica o más orientada a open source**.
